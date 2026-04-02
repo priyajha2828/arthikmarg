@@ -1,0 +1,142 @@
+/* src/index.css — THEME VARIABLES (place at the very top) */
+
+/* Base variables (light defaults) — ThemeProvider will override via data-theme attribute at runtime */
+:root {
+  --primary-500: #172554;
+  --bg-default: #ffffff;
+
+  /* IMPORTANT: keep body text black per your request */
+  --text-default: #0b1220;
+
+  /* text used on surfaces (cards/sidebars). Default = body text in light theme */
+  --text-surface: var(--text-default);
+
+  /* semantic surfaces */
+  --surface-100: #ffffff;
+  --surface-200: #f8fafc;
+
+  /* sidebar */
+  --sidebar-bg: #f3f4f6; /* light gray by default for light theme */
+
+  /* header / popover */
+  --header-bg: var(--bg-default);
+  --header-text: var(--text-default);
+
+  /* muted text */
+  --muted: #6b7280;
+
+  /* transitions */
+  --color-transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+
+/* Dark theme
+   NOTE: --text-default kept as black (user requirement). We only change --text-surface
+   so that surfaces show white text while body text remains black (user asked that).
+   Be careful: if you place body text on dark background it may be unreadable.
+*/
+[data-theme="dark"] {
+  --primary-500: #0f172a;
+  --bg-default: #0b1220;
+
+  /* keep body text black (as requested) */
+  --text-default: #0b1220;
+
+  /* surface becomes dark and surface text should be white */
+  --surface-100: #0b1220;
+  --surface-200: #071024;
+  --text-surface: #ffffff;
+
+  /* sidebar in dark theme -> dark */
+  --sidebar-bg: #071024;
+
+  --header-bg: var(--bg-default);
+  --header-text: var(--text-surface); /* header on dark surfaces uses surface text */
+  --muted: #9ca3af;
+}
+
+/* Classic (cream) theme */
+[data-theme="classic"] {
+  --primary-500: #a67c3b;    /* accent */
+  --bg-default: #F6E9D2;     /* cream */
+
+  /* keep body text black (as requested) */
+  --text-default: #0b1220;
+
+  /* surfaces (cards/sidebars) use cream and surface text requested white */
+  --surface-100: #F6E9D2;
+  --surface-200: #efe6cf;
+  --text-surface: #ffffff;
+
+  /* sidebar in classic -> cream */
+  --sidebar-bg: #F6E9D2;
+
+  --header-bg: var(--bg-default);
+  --header-text: var(--text-surface);
+  --muted: #8a7b63;
+}
+
+/* Global layout helpers (use .header, .bg-default, .text-default in components) */
+html, body, #root {
+  height: 100%;
+  background: var(--bg-default);
+  color: var(--text-default);
+  transition: var(--color-transition);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Convenience utility classes (you can replace these with Tailwind tokens) */
+.primary-bg { background-color: var(--primary-500); }
+.primary-text { color: var(--primary-500); }
+.bg-default { background-color: var(--bg-default); }
+.text-default { color: var(--text-default); }
+
+/* Sidebar helper (theme-aware) */
+.bg-sidebar {
+  background: var(--sidebar-bg);
+  color: var(--text-surface); /* sidebar text follows surface text setting */
+}
+
+/* small helpers */
+.header {
+  background: var(--header-bg);
+  color: var(--header-text);
+  transition: var(--color-transition);
+}
+
+/* SURFACE: cards, panels, popovers — text inside these inherits --text-surface */
+.bg-surface {
+  background: var(--surface-100);
+  color: var(--text-surface);    /* <--- text for surfaces (white in dark/classic, black in light) */
+  transition: var(--color-transition);
+}
+
+/* inputs etc. */
+.input-surface {
+  background: var(--surface-100);
+  color: var(--text-default); /* inputs usually show default body text color */
+  border-color: rgba(0,0,0,0.06);
+  transition: var(--color-transition);
+}
+
+/* muted text helper */
+.text-muted { color: var(--muted); }
+
+/* button helper */
+.btn-primary {
+  background-color: var(--primary-500);
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  transition: var(--color-transition);
+}
+
+/* small accessibility helper: prefer the alt text color on classic where needed */
+.classic-body {
+  color: var(--text-default); /* body kept black per request; use var(--text-default-alt) if desired */
+}
+
+/* Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
