@@ -1,3 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
 /* src/index.css — THEME VARIABLES (place at the very top) */
 
 /* Base variables (light defaults) — ThemeProvider will override via data-theme attribute at runtime */
@@ -136,7 +143,3 @@ html, body, #root {
   color: var(--text-default); /* body kept black per request; use var(--text-default-alt) if desired */
 }
 
-/* Tailwind */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
